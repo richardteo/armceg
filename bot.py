@@ -28,7 +28,7 @@ path = '/app'
 creds = ServiceAccountCredentials.from_json_keyfile_name(path + '/creds.json', scope)
 
 client = gspread.authorize(creds)
-sheet = client.open('Seletar SFT Records').worksheet('ARMCEG')
+sheet = client.open('Seletar SFT Records').worksheet('CEC')
 PORT = int(os.environ.get('PORT', '8443'))
 
 
@@ -73,7 +73,7 @@ def password(update: Update, _: CallbackContext):
             if userID not in userID_database:
                 userID_database[userID] = []
                 update.message.reply_text(
-                'Hi! My name is Armceg Bot.\n'
+                'Hi! My name is CEC Bot.\n'
                 'I will help you sign in for Self-Organized Fitness Training. \n\n'
                 'Please enter the password.\n\n'
                 'Send /cancel to stop talking to me.', reply_markup=ReplyKeyboardRemove()
@@ -98,7 +98,7 @@ def password(update: Update, _: CallbackContext):
 def check_health(update: Update, _: CallbackContext):
     # A list of questions for the User to read through before continuing with the form. Sent as a photo.
     # If he says Yes to any of the questions listed, End conversation.
-    if update.message.text == 'ARMCEG':
+    if update.message.text == 'CEC':
         reply_keyboard = [['Yes', 'No']]
         filename = "/app/Checklist.png"
         update.message.bot.send_photo(update.message.chat_id,open(filename,'rb'),caption=
@@ -303,7 +303,7 @@ def submit(update: Update, _: CallbackContext):
         LocationRoute = userID_database [userID][3]
         Time_start = userID_database[userID][4]
         client = gspread.authorize(creds)
-        sheet = client.open('Seletar SFT Records').worksheet('ARMCEG')
+        sheet = client.open('Seletar SFT Records').worksheet('CEC')
         data = sheet.get_all_records()
         row_to_insert = [Date,Person, Activity, LocationRoute, Time_start]
         userID_savedindex[userID] = len(data) +2
